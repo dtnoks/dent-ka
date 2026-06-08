@@ -36,9 +36,6 @@ A few important rules:
   exists simply replaces the old one.
 - **`index.html` must stay named `index.html`** — that is what makes it the
   homepage. If you rename it, the main web address stops working.
-- This repository is **public**: anyone can *read* the code, but only you (and
-  anyone you invite) can *change* it. Never put passwords or private keys in
-  these files.
 
 ---
 

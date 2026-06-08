@@ -524,6 +524,29 @@
   }
 
   /* MOBILE */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    padding: 11px 10px;
+    z-index: 110;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--charcoal);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-toggle span + span { margin-top: 5px; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
   @media (max-width: 768px) {
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 3rem 1.5rem; }
@@ -531,7 +554,19 @@
     .why-grid, .info-grid, .form-grid { grid-template-columns: 1fr; gap: 2rem; }
     .why-intro { padding-right: 0; }
     .form-row { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-links {
+      position: fixed; top: 70px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--cream); border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0; box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transform: translateY(-170%); transition: transform 0.35s ease;
+      max-height: calc(100vh - 70px); overflow-y: auto;
+    }
+    .nav-links.open { transform: translateY(0); }
+    .nav-links li { width: 100%; }
+    .nav-links a { display: block; padding: 0.85rem 2rem; }
+    .nav-links a.nav-cta { margin: 0.5rem 2rem; text-align: center; }
     .nav-phone { display: none; }
     section { padding: 3.5rem 0; }
   }
@@ -550,6 +585,9 @@
     <li><a href="tel:030647655" class="nav-cta">030 647 655</a></li>
   </ul>
   <span class="nav-phone">030 647 655</span>
+  <button class="nav-toggle" aria-label="Meni" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -728,6 +766,26 @@
     e.target.reset();
     setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
   }
+</script>
+<script>
+  (function () {
+    var t = document.querySelector('.nav-toggle');
+    var l = document.querySelector('.nav-links');
+    if (!t || !l) return;
+    function close() {
+      l.classList.remove('open');
+      t.classList.remove('open');
+      t.setAttribute('aria-expanded', 'false');
+    }
+    t.addEventListener('click', function () {
+      var open = l.classList.toggle('open');
+      t.classList.toggle('open', open);
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    l.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+  })();
 </script>
 </body>
 </html>

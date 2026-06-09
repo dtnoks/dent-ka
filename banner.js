@@ -28,7 +28,7 @@ var BANNER = {
 
   // TEXT SHOWN IN THE BANNER — edit freely
   title:   "Ordinacija zaprta",
-  message: "Med 15. 7. in 29. 7. 2026 smo na dopustu. Hvala za razumevanje in se vidimo kmalu.",
+  message: "Med 25. 6. in 6. 7. 2026 smo na dopustu. Hvala za razumevanje in se vidimo kmalu.",
 
 };
 
